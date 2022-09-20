@@ -1,10 +1,11 @@
 {
   "files": {
-    "main.js": "/sprint_02/static/js/main.6caba549.js",
+    "main.js": "/sprint_02/static/js/main.1bbd8f9a.js",
+    "static/media/user.svg": "/sprint_02/static/media/user.a37abdff661249c1daf11ba903674705.svg",
     "index.html": "/sprint_02/index.html",
-    "main.6caba549.js.map": "/sprint_02/static/js/main.6caba549.js.map"
+    "main.1bbd8f9a.js.map": "/sprint_02/static/js/main.1bbd8f9a.js.map"
   },
   "entrypoints": [
-    "static/js/main.6caba549.js"
+    "static/js/main.1bbd8f9a.js"
   ]
 }
