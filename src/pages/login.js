@@ -91,7 +91,6 @@ export const Login = () => {
       <Subcontainer>
         <Form onSubmit={handleSubmit}>
           <img src={userlogo} alt="" />
-          <img src="src/assets/icon/user.svg" alt="" />
           <H2>Login</H2>
           <Label>Email:</Label>
           <Input type="email" name="email" id="email" placeholder="email" defaultValue="admin@example.com" required />

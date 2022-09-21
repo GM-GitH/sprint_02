@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import { Login } from "./pages/login";
 import PrivateRoute from "./components/privateRoute";
 import { Dashboard } from "./pages/dashboard";
@@ -6,6 +6,10 @@ import { Dashboard } from "./pages/dashboard";
 function App() {
   return (
     <Router>
+      <div style={{ display: "inline", width: "100px" }}>
+        <Link to="login">Login </Link>
+        <Link to="dashboard"> | Dashboard</Link>
+      </div>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<Login />} />
