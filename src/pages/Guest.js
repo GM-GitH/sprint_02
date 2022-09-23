@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { ButtonRed } from "../components/styled/StyledBtn";
 import img from "../assets/icon/img";
 // import image from "../assets/img/image";
-import Home from "../components/Home";
+import GuestList from "../components/GuestList";
 
 const leftOpen = () => {
   document.getElementById("navbar").style.marginLeft = "20%";
@@ -100,14 +100,14 @@ const DashboardStyle = styled.div`
   }
 `;
 
-const Dashboard = () => {
+const Guest = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("isLogin");
     navigate("/login");
   };
   useEffect(() => {
-    document.title = "Dashboard | Home";
+    document.title = "Dashboard | Guest";
   }, []);
   return (
     <div>
@@ -130,10 +130,10 @@ const Dashboard = () => {
               Logout
             </ButtonRed>
           </div>
-          <Home />
+          <GuestList />
         </div>
       </DashboardStyle>
     </div>
   );
 };
-export default Dashboard
+export default Guest;

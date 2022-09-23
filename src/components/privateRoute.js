@@ -1,12 +1,10 @@
-import React from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
-const PrivateRoute = ({ children }) => {
-  const isLogin = () => {
-    return JSON.parse(localStorage.getItem("isLogin"));
-  };
-
-  return isLogin() ? children : <Navigate to="/login" />;
+const PrivateRoute = ({ user, children }) => {
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
+  return children ? children : <Outlet />
 };
 
 export default PrivateRoute;
