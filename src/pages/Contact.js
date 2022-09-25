@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { ButtonRed } from "../components/styled/StyledBtn";
 import img from "../assets/icon/img";
 // import image from "../assets/img/image";
-import GuestList from "../components/GuestList";
 
 const leftOpen = () => {
   document.getElementById("navbar").style.marginLeft = "20%";
@@ -100,14 +99,14 @@ const DashboardStyle = styled.div`
   }
 `;
 
-const Guest = () => {
+const Contact = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("isLogin");
     navigate("/login");
   };
   useEffect(() => {
-    document.title = "Dashboard | Guest";
+    document.title = "Dashboard | Concierge";
   }, []);
   return (
     <div>
@@ -116,10 +115,10 @@ const Guest = () => {
         <div id="leftbar">
           <img className="logo" src={img.logo} alt="Hotel Admin Dashboard logo" />
           <Link to="/dashboard">Dashboard</Link>
-          <Link to="/rooms">Room</Link>
+          <Link to="/rooms">Rooms</Link>
           <Link to="/bookings">Bookings</Link>
-          <Link to="/guest">Guest</Link>
-          <Link to="/concierge">Concierge</Link>
+          <Link to="/users">Users</Link>
+          <Link to="/contact">Contact</Link>
         </div>
         <div className="navbar" id="navbar">
           <div className="navbar-container">
@@ -130,10 +129,10 @@ const Guest = () => {
               Logout
             </ButtonRed>
           </div>
-          <GuestList />
+          Contact is Empty
         </div>
       </DashboardStyle>
     </div>
   );
 };
-export default Guest;
+export default Contact;

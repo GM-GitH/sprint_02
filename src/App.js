@@ -1,12 +1,12 @@
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link, Navigate } from "react-router-dom";
 import { useState } from "react";
 import Login from "./pages/Login";
 import PrivateRoute from "./components/privateRoute";
 import Dashboard from "./pages/Dashboard";
-import Guest from "./pages/Guest";
 import Rooms from "./pages/Rooms";
 import Bookings from "./pages/Bookings";
-import Concierge from "./pages/Concierge";
+import Contact from "./pages/Contact";
+import Users from "./pages/Users";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -16,28 +16,31 @@ function App() {
       email: "admin@example.com",
       password: "example",
     });
+    localStorage.setItem("isLogin", true);
+    return <Navigate to="/"/>
   };
-  const logout = () => setUser(null);
+  const logout = () => {setUser(null); localStorage.removeItem("isLogin");};
 
   return (
     <Router>
       <div style={{ display: "inline", width: "100px" }}>
-        <Link to="login">Login </Link>
-        <Link to="dashboard"> | Dashboard</Link>
+        <Link to="/login">Login </Link>
+        <Link to="/"> | Dashboard</Link>
       </div>
 
       {user ? <button onClick={logout}>Logout</button> : <button onClick={login}>Login</button>}
 
+
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="*" element={<Login />} />
+        <Route path="/login" element={user ? <Navigate to="/"/> : <Login setUser={setUser} />} />
         <Route element={<PrivateRoute user={user} />}>
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="*" element={<Navigate to="/" />} />
+          <Route path="/" element={<Dashboard user={user} logout={logout} />} />
           <Route path="/rooms" element={<Rooms />} />
           <Route path="/bookings" element={<Bookings />} />
-          <Route path="/guest" element={<Guest />} />
-          <Route path="/guest/:id" element={<h1>ID</h1>} />
-          <Route path="/concierge" element={<Concierge />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/users/:id" element={<h1>ID: </h1>} />
+          <Route path="/contact" element={<Contact />} />
         </Route>
       </Routes>
     </Router>

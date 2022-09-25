@@ -1,73 +1,43 @@
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import userlogo from "../assets/icon/user.svg";
+import userlogo from "../assets/icon/user.svg"; 
 import { useEffect, useState } from "react";
 import { ButtonGreen } from "../components/styled/StyledBtn";
+import { Container, Form, H2, Label, P, Subcontainer } from "../components/styled/StyledLogin";
+import styled from "styled-components";
+// import { useNavigate } from "react-router-dom";
 
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  position: relative;
-  background-color: #f8f8f8;
-  font-family: "Poppins", sans-serif;
-  font-size: 20px;
-  justify-content: center;
-  text-align: center;
-`;
-const Subcontainer = styled.div`
-  position: absolute;
-  top: 45vh;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 10px;
-  box-shadow: 0px 16px 30px #00000014;
-`;
-const Form = styled.form`
-  background-color: #ffffff;
-  padding: 30px;
-  border-radius: 12px;
-`;
-const H2 = styled.h2`
-  color: #e23428;
-  line-height: 30px;
-  cursor: default;
-`;
-const Label = styled.label`
-  display: block;
-  text-align: left;
-`;
 let Input = styled.input`
-  font-size: 18px;
-  padding: 5px;
-  margin-bottom: 30px;
-  border: none;
-  outline: none;
-  border-bottom: 2px solid #c5c5c5;
-`;
-const P = styled.p`
-  font-size: 12px;
+font-size: 18px;
+padding: 5px;
+margin-bottom: 30px;
+border: none;
+outline: none;
+border-bottom: 2px solid #c5c5c5;
 `;
 
-const Login = () => {
+const Login = ({user, setUser}) => {
   const [email, setEmail] = useState("admin@example.com");
   const [password, setPassword] = useState("example");
-  const isLogged = localStorage.getItem("isLogin");
-  const navigate = useNavigate();
+  // const navigate = useNavigate()
   const handleSubmit = (e) => {
     e.preventDefault();
     if (email === "admin@example.com" && password === "example") {
+      setUser({"email": email, "password": password})
       localStorage.setItem("isLogin", true);
-      navigate("/dashboard");
-    }
+    } return
+    // else {Input = styled.input`
+    // font-size: 18px;
+    // padding: 5px;
+    // margin-bottom: 30px;
+    // border: none;
+    // outline: none;
+    // border-bottom: 2px solid red;`}
+    // return navigate("/login")
   };
-
+  
   useEffect(() => {
-    if (isLogged) {
-      navigate("/dashboard");
-    } else {
-      document.title = "Dashboard | Login";
-    }
-  });
+    document.title = "Dashboard | Login";
+  }, []);
+
   return (
     <Container>
       <Subcontainer>

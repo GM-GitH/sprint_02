@@ -115,10 +115,10 @@ const Rooms = () => {
         <div id="leftbar">
           <img className="logo" src={img.logo} alt="Hotel Admin Dashboard logo" />
           <Link to="/dashboard">Dashboard</Link>
-          <Link to="/rooms">Room</Link>
+          <Link to="/rooms">Rooms</Link>
           <Link to="/bookings">Bookings</Link>
-          <Link to="/guest">Guest</Link>
-          <Link to="/concierge">Concierge</Link>
+          <Link to="/users">Users</Link>
+          <Link to="/contact">Contact</Link>
         </div>
         <div className="navbar" id="navbar">
           <div className="navbar-container">

@@ -154,7 +154,7 @@ const GuestList = () => {
   return (
     <HomeStyle>
       <div className="grid-container">
-        <Link to={`/guest/${jsonData[0].id}`}>
+        <Link to={`/users/${jsonData[0].id}`}>
           <div className="item3 card">
             <div className="card__text">
               <p className="card__p1">{`${jsonData[0].first_name} ${jsonData[0].last_name}`}</p>
@@ -162,7 +162,7 @@ const GuestList = () => {
             </div>
           </div>
         </Link>
-        <Link to={`/guest/${jsonData[70].id}`}>
+        <Link to={`/users/${jsonData[70].id}`}>
           <div className="item4 card">
             <div className="card__text">
               <p className="card__p1">{`${jsonData[70].first_name} ${jsonData[70].last_name}`}</p>
@@ -170,7 +170,7 @@ const GuestList = () => {
             </div>
           </div>
         </Link>
-        <Link to={`/guest/${jsonData[140].id}`}>
+        <Link to={`/users/${jsonData[140].id}`}>
           <div className="item5 card">
             <div className="card__text">
               <p className="card__p1">{`${jsonData[140].first_name} ${jsonData[140].last_name}`}</p>
@@ -178,7 +178,7 @@ const GuestList = () => {
             </div>
           </div>
         </Link>
-        <Link to={`/guest/${jsonData[199].id}`}>
+        <Link to={`/users/${jsonData[199].id}`}>
           <div className="item6 card">
             <div className="card__text">
               <p className="card__p1">{`${jsonData[199].first_name} `}</p>

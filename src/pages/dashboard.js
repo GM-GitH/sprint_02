@@ -100,15 +100,18 @@ const DashboardStyle = styled.div`
   }
 `;
 
-const Dashboard = () => {
-  const navigate = useNavigate();
-  const handleLogout = () => {
-    localStorage.removeItem("isLogin");
-    navigate("/login");
-  };
+const Dashboard = ({logout}) => {
+  const isLogin = localStorage.getItem("isLogin")
+  const navigate = useNavigate()
+  function handleLocalStorage() {
+    localStorage.removeItem("isLogin")
+    navigate("/login")
+  }
+
   useEffect(() => {
     document.title = "Dashboard | Home";
   }, []);
+
   return (
     <div>
       <DashboardStyle>
@@ -116,17 +119,18 @@ const Dashboard = () => {
         <div id="leftbar">
           <img className="logo" src={img.logo} alt="Hotel Admin Dashboard logo" />
           <Link to="/dashboard">Dashboard</Link>
-          <Link to="/rooms">Room</Link>
+          <Link to="/rooms">Rooms</Link>
           <Link to="/bookings">Bookings</Link>
-          <Link to="/guest">Guest</Link>
-          <Link to="/concierge">Concierge</Link>
+          <Link to="/users">Users</Link>
+          <Link to="/contact">Contact</Link>
         </div>
         <div className="navbar" id="navbar">
           <div className="navbar-container">
             <button id="closeNav" className="close" onClick={leftClose}></button>
             <button id="openNav" className="open" onClick={leftOpen}></button>
             <h1>Dashboard</h1>
-            <ButtonRed id="logout" onClick={handleLogout}>
+            {/******************************* MUST CLICK TWICE TEMPORARILY BY LOCAL STORAGE AND STATE ********************************/}
+            <ButtonRed id="logout" onClick={isLogin ? (handleLocalStorage) : logout}>
               Logout
             </ButtonRed>
           </div>
