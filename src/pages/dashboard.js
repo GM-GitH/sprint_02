@@ -3,6 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { ButtonRed } from "../components/styled/StyledBtn";
 import img from "../assets/icon/img";
+import dashboard from "../assets/icon/1dashboard.png"
+import rooms from "../assets/icon/2rooms.png"
+import bookings from "../assets/icon/3bookings.png"
+import users from "../assets/icon/4users.png"
+import contact from "../assets/icon/5guest.png"
 // import image from "../assets/img/image";
 import Home from "../components/Home";
 
@@ -47,10 +52,15 @@ const DashboardStyle = styled.div`
     &:hover {
       color: #e23428;
       border-left: 5px solid #e23428;
+      & img {
+        filter: brightness(.55) hue-rotate(241deg) saturate(20);
+      }
     }
-  }
-  #navbar {
-    margin-left: 20%;
+    & img {
+      width: 24px;
+      vertical-align: middle;
+      margin-right: 20px
+    }
   }
   #leftbar {
     display: block;
@@ -61,6 +71,9 @@ const DashboardStyle = styled.div`
     font-family: "Poppins", sans-serif;
     width: 20%;
     box-shadow: 13pt 3pt 40pt #00000005;
+  }
+  #navbar {
+    margin-left: 20%;
   }
   .close,
   .open {
@@ -103,6 +116,7 @@ const DashboardStyle = styled.div`
 const Dashboard = ({logout}) => {
   const isLogin = localStorage.getItem("isLogin")
   const navigate = useNavigate()
+  
   function handleLocalStorage() {
     localStorage.removeItem("isLogin")
     navigate("/login")
@@ -118,11 +132,11 @@ const Dashboard = ({logout}) => {
         <div className="left-panel"></div>
         <div id="leftbar">
           <img className="logo" src={img.logo} alt="Hotel Admin Dashboard logo" />
-          <Link to="/dashboard">Dashboard</Link>
-          <Link to="/rooms">Rooms</Link>
-          <Link to="/bookings">Bookings</Link>
-          <Link to="/users">Users</Link>
-          <Link to="/contact">Contact</Link>
+          <Link to="/dashboard"><img src={dashboard} alt="" /> Dashboard</Link>
+          <Link to="/rooms"><img src={rooms} alt="" /> Rooms</Link>
+          <Link to="/bookings"><img src={bookings} alt="" /> Bookings</Link>
+          <Link to="/users"><img src={users} alt="" /> Users</Link>
+          <Link to="/contact"><img src={contact} alt="" /> Contact</Link>
         </div>
         <div className="navbar" id="navbar">
           <div className="navbar-container">
@@ -131,7 +145,8 @@ const Dashboard = ({logout}) => {
             <h1>Dashboard</h1>
             {/******************************* MUST CLICK TWICE TEMPORARILY BY LOCAL STORAGE AND STATE ********************************/}
             <ButtonRed id="logout" onClick={isLogin ? (handleLocalStorage) : logout}>
-              Logout
+              {isLogin ? "Logout" : "Confirm"}
+              {/* Logout */}
             </ButtonRed>
           </div>
           <Home />

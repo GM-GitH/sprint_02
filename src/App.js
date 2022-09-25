@@ -23,12 +23,11 @@ function App() {
 
   return (
     <Router>
-      <div style={{ display: "inline", width: "100px" }}>
+      <div style={{ display: "none", width: "100px" }}>
         <Link to="/login">Login </Link>
         <Link to="/"> | Dashboard</Link>
-      </div>
-
       {user ? <button onClick={logout}>Logout</button> : <button onClick={login}>Login</button>}
+      </div>
 
 
       <Routes>

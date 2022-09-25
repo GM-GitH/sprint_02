@@ -1,10 +1,11 @@
 import { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { ButtonRed } from "../components/styled/StyledBtn";
 import img from "../assets/icon/img";
 // import image from "../assets/img/image";
-import GuestList from "../components/GuestList";
+// import GuestList from "../components/GuestList";
+import { LeftBar } from "../components/styled/StyledLeftbar";
 
 const leftOpen = () => {
   document.getElementById("navbar").style.marginLeft = "20%";
@@ -113,14 +114,7 @@ const Users = () => {
     <div>
       <DashboardStyle>
         <div className="left-panel"></div>
-        <div id="leftbar">
-          <img className="logo" src={img.logo} alt="Hotel Admin Dashboard logo" />
-          <Link to="/dashboard">Dashboard</Link>
-          <Link to="/rooms">Rooms</Link>
-          <Link to="/bookings">Bookings</Link>
-          <Link to="/users">Users</Link>
-          <Link to="/contact">Contact</Link>
-        </div>
+        <LeftBar />
         <div className="navbar" id="navbar">
           <div className="navbar-container">
             <button id="closeNav" className="close" onClick={leftClose}></button>
@@ -130,7 +124,8 @@ const Users = () => {
               Logout
             </ButtonRed>
           </div>
-          <GuestList />
+          Users is empty
+          {/* <GuestList /> */}
         </div>
       </DashboardStyle>
     </div>
