@@ -26,7 +26,9 @@ const leftClose = () => {
 };
 const DashboardStyle = styled.div`
   .navbar-container {
+    display: flex;
     position: sticky;
+    justify-content: space-between;
     top: 0;
     background-color: #ffffff;
     z-index: 2;
@@ -34,6 +36,14 @@ const DashboardStyle = styled.div`
     box-shadow: 0pt 3pt 10pt #00000005;
     user-select: none;
     cursor: default;
+  }
+  .navbar-buttons {
+    display: inline-block;
+    margin-top: 15px;
+  }
+  .material-symbols-outlined {
+    margin-right: 30px;
+    color: #135846;
   }
   .logo {
     box-sizing: border-box;
@@ -106,10 +116,10 @@ const DashboardStyle = styled.div`
     line-height: 42px;
   }
   #logout {
-    position: absolute;
-    right: 10px;
-    top: 20px;
     cursor: pointer;
+    display: inline;
+    vertical-align: bottom;
+    margin-left: 50px
   }
 `;
 
@@ -140,14 +150,23 @@ const Dashboard = ({logout}) => {
         </div>
         <div className="navbar" id="navbar">
           <div className="navbar-container">
-            <button id="closeNav" className="close" onClick={leftClose}></button>
-            <button id="openNav" className="open" onClick={leftOpen}></button>
-            <h1>Dashboard</h1>
-            {/******************************* MUST CLICK TWICE TEMPORARILY BY LOCAL STORAGE AND STATE ********************************/}
-            <ButtonRed id="logout" onClick={isLogin ? (handleLocalStorage) : logout}>
-              {isLogin ? "Logout" : "Confirm"}
-              {/* Logout */}
-            </ButtonRed>
+            <div className="navbar-title">
+              <button id="closeNav" className="close" onClick={leftClose}></button>
+              <button id="openNav" className="open" onClick={leftOpen}></button>
+              <h1>Dashboard</h1>
+            </div>
+            <div className="navbar-buttons">
+              <span className="material-symbols-outlined">search</span>
+              <span className="material-symbols-outlined">favorite</span>
+              <span className="material-symbols-outlined">mail</span>
+              <span className="material-symbols-outlined">notifications</span>
+              <span className="material-symbols-outlined">chat</span>
+              {/******************************* MUST CLICK TWICE TEMPORARILY BY LOCAL STORAGE AND STATE ********************************/}
+              <ButtonRed id="logout" onClick={isLogin ? handleLocalStorage : logout}>
+                {isLogin ? "Logout" : "Confirm"}
+                {/* Logout */}
+              </ButtonRed>
+            </div>
           </div>
           <Home />
         </div>

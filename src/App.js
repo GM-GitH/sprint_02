@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes, Link, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import { useState } from "react";
 import Login from "./pages/Login";
 import PrivateRoute from "./components/privateRoute";
@@ -23,11 +23,6 @@ function App() {
 
   return (
     <Router>
-      <div style={{ display: "none", width: "100px" }}>
-        <Link to="/login">Login </Link>
-        <Link to="/"> | Dashboard</Link>
-      {user ? <button onClick={logout}>Logout</button> : <button onClick={login}>Login</button>}
-      </div>
 
 
       <Routes>

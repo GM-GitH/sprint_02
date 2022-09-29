@@ -1,8 +1,10 @@
+import { useState } from "react";
 import styled from "styled-components";
+import jsonRooms from "../../json/jsonRoom";
+import ReactPaginate from "react-paginate";
 
 const Style = styled.div`
   .card {
-    box-sizing: border-box;
     margin-top: 30px;
     background-color: #ffffff;
     border-radius: 10px;
@@ -13,14 +15,19 @@ const Style = styled.div`
     width: 100%;
     border-collapse: collapse;
     font-size: 14px;
+    overflow-wrap: break-word;
   }
   th {
     text-align: left;
     padding: 20px 10px 20px 15px;
+    overflow-wrap: break-word;
   }
   tr {
     position: relative;
     border-bottom: 1px solid #f5f5f5;
+    &:hover {
+      background-color: #00000005;
+    }
   }
   td {
     position: relative;
@@ -31,14 +38,14 @@ const Style = styled.div`
     cursor: pointer;
   }
   .room__img {
-    float: left;
-    width: 60%;
-    height: 50%;
-    left: 0;
+    max-width: 200px;
     border-radius: 10px;
+    background-color: gray;
+    &:hover {
+      cursor: pointer;
+    }
   }
   .room_txt {
-    padding-left: 70%;
     &__p1 {
       cursor: pointer;
       margin-top: 0;
@@ -61,12 +68,14 @@ const Style = styled.div`
     & button {
     }
     &__b1 {
+      min-width: 90px;
       font-family: "Poppins", sans-serif;
       color: #ffffff;
       border-style: none;
       border-radius: 10px;
       padding: 10px 20px;
       margin-right: 50px;
+      overflow-wrap: normal;
     }
     &__b2 {
       cursor: pointer;
@@ -87,35 +96,94 @@ const Style = styled.div`
   }
   .Availible {
     background-color: #5ad07a;
+    &:hover {
+      filter: brightness(110%);
+    }
   }
   .Booked {
     background-color: #e23428;
-  }
-  .pagination {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 50px;
-  }
-  .right-filter__button {
-    color: #135846;
-    background-color: inherit;
-    font-size: 14px;
-    border-style: none;
-    border: 1px solid #135846;
-    border-radius: 10px;
-    padding: 15px 25px;
-    margin-left: 20px;
     &:hover {
-      color: #ffffff;
-      background-color: #135846;
+      filter: brightness(110%);
     }
   }
-  .selected {
+  .paginationContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    margin-top: 20px;
+    user-select: none;
+  }
+  .paginationBtns {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    & li {
+      margin: 10px;
+    }
+    & a {
+      text-align: center;
+      color: #135846;
+      background-color: inherit;
+      font-size: 14px;
+      border-style: none;
+      border: 1px solid #135846;
+      border-radius: 10px;
+      padding: 10px 5px;
+      margin-left: 20px;
+      &:hover {
+        color: #ffffff;
+        background-color: #135846;
+      }
+    }
+  }
+  .paginationActive a {
     color: #ffffff;
     background-color: #135846;
+    cursor: default;
   }
 `;
 export const RoomsTable = () => {
+  const rooms = jsonRooms;
+  //eslint-disable-next-line
+  const [list, setList] = useState(rooms.slice(0, 25));
+  const [page, setPage] = useState(0);
+  const listItemsPerPage = 5;
+  const pagesVisited = page * listItemsPerPage;
+  const displayBookings = list.slice(pagesVisited, pagesVisited + listItemsPerPage).map((room) => {
+    return (
+      <tr key={room.id}>
+        <td>
+          <input type="checkbox" name="" id="" />
+        </td>
+        <td>
+          <img className="room__img" src="http://legendpalace.com.mo/wp-content/uploads/2017/08/388-Royal-Suite_king-room.jpg" alt="<Empty>" />
+        </td>
+        <td>
+          <div className="room_txt">
+            <p className="room_txt__p1">#{room.room_id}</p>
+            <p className="room_txt__p2">{room.room_name}</p>
+          </div>
+        </td>
+        <td>{room.bed_type}</td>
+        <td>{`Floor ${room.floor} Room ${room.id}`}</td>
+        <td>AC, Shower, Double Bed, Towel, Bathup, Coffee Set, LED TV, Wifi</td>
+        <td>
+          ${room.Rate}
+          <span className="mini">/night</span>
+        </td>
+        <td>
+          <button className={room.Status ? "status__b1 Availible" : "status__b1 Booked"}>{room.Status ? "Availible" : "Booked"}</button>
+          <button className="status__b2">⋮</button>
+        </td>
+      </tr>
+    );
+  });
+  const pageCount = Math.ceil(list.length / listItemsPerPage);
+  const changePage = ({ selected }) => {
+    setPage(selected);
+  };
+
   return (
     <>
       <Style>
@@ -127,159 +195,32 @@ export const RoomsTable = () => {
                   <input type="checkbox" name="" id="" />
                 </th>
                 <th>Room Name</th>
-                <th>Bed Type</th>
-                <th>Room Floor</th>
+                <th></th>
+                <th style={{ width: "90px" }}>Bed Type</th>
+                <th style={{ width: "90px" }}>Room Floor</th>
                 <th>Facilities</th>
                 <th>Rate</th>
                 <th>Status</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <input type="checkbox" name="" id="" />
-                </td>
-                <td>
-                  <img className="room__img" src="http://gobebaba.com/images/merlin-grey-ral-colour_2.jpg" alt="" />
-                  <div className="room_txt">
-                    <p className="room_txt__p1">#0123456</p>
-                    <p className="room_txt__p2">DeluxeA-91234</p>
-                  </div>
-                </td>
-                <td>Double Bed</td>
-                <td>Floor A-1</td>
-                <td>AC, Shower, Double Bed, Towel, Bathup, Coffee Set, LED TV, Wifi</td>
-                <td>
-                  $145<span className="mini">/night</span>
-                </td>
-                <td>
-                  <button className="status__b1 Availible">Availible</button>
-                  <button className="status__b2">⋮</button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <input type="checkbox" name="" id="" />
-                </td>
-                <td>
-                  <img className="room__img" src="http://gobebaba.com/images/merlin-grey-ral-colour_2.jpg" alt="" />
-                  <div className="room_txt">
-                    <p className="room_txt__p1">#0123456</p>
-                    <p className="room_txt__p2">DeluxeA-91234</p>
-                  </div>
-                </td>
-                <td>Double Bed</td>
-                <td>Floor A-1</td>
-                <td>AC, Shower, Double Bed, Towel, Bathup, Coffee Set, LED TV, Wifi</td>
-                <td>
-                  $145<span className="mini">/night</span>
-                </td>
-                <td>
-                  <button className="status__b1 Booked">Booked</button>
-                  <button className="status__b2">⋮</button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <input type="checkbox" name="" id="" />
-                </td>
-                <td>
-                  <img className="room__img" src="http://gobebaba.com/images/merlin-grey-ral-colour_2.jpg" alt="" />
-                  <div className="room_txt">
-                    <p className="room_txt__p1">#0123456</p>
-                    <p className="room_txt__p2">DeluxeA-91234</p>
-                  </div>
-                </td>
-                <td>Double Bed</td>
-                <td>Floor A-1</td>
-                <td>AC, Shower, Double Bed, Towel, Bathup, Coffee Set, LED TV, Wifi</td>
-                <td>
-                  $145<span className="mini">/night</span>
-                </td>
-                <td>
-                  <button className="status__b1 Availible">Availible</button>
-                  <button className="status__b2">⋮</button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <input type="checkbox" name="" id="" />
-                </td>
-                <td>
-                  <img className="room__img" src="http://gobebaba.com/images/merlin-grey-ral-colour_2.jpg" alt="" />
-                  <div className="room_txt">
-                    <p className="room_txt__p1">#0123456</p>
-                    <p className="room_txt__p2">DeluxeA-91234</p>
-                  </div>
-                </td>
-                <td>Double Bed</td>
-                <td>Floor A-1</td>
-                <td>AC, Shower, Double Bed, Towel, Bathup, Coffee Set, LED TV, Wifi</td>
-                <td>
-                  $145<span className="mini">/night</span>
-                </td>
-                <td>
-                  <button className="status__b1 Availible">Availible</button>
-                  <button className="status__b2">⋮</button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <input type="checkbox" name="" id="" />
-                </td>
-                <td>
-                  <img className="room__img" src="http://gobebaba.com/images/merlin-grey-ral-colour_2.jpg" alt="" />
-                  <div className="room_txt">
-                    <p className="room_txt__p1">#0123456</p>
-                    <p className="room_txt__p2">DeluxeA-91234</p>
-                  </div>
-                </td>
-                <td>Double Bed</td>
-                <td>Floor A-1</td>
-                <td>AC, Shower, Double Bed, Towel, Bathup, Coffee Set, LED TV, Wifi</td>
-                <td>
-                  $145<span className="mini">/night</span>
-                </td>
-                <td>
-                  <button className="status__b1 Booked">Booked</button>
-                  <button className="status__b2">⋮</button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <input type="checkbox" name="" id="" />
-                </td>
-                <td>
-                  <img className="room__img" src="http://gobebaba.com/images/merlin-grey-ral-colour_2.jpg" alt="" />
-                  <div className="room_txt">
-                    <p className="room_txt__p1">#0123456</p>
-                    <p className="room_txt__p2">DeluxeA-91234</p>
-                  </div>
-                </td>
-                <td>Double Bed</td>
-                <td>Floor A-1</td>
-                <td>AC, Shower, Double Bed, Towel, Bathup, Coffee Set, LED TV, Wifi</td>
-                <td>
-                  $145<span className="mini">/night</span>
-                </td>
-                <td>
-                  <button className="status__b1 Booked">Booked</button>
-                  <button className="status__b2">⋮</button>
-                </td>
-              </tr>
-            </tbody>
+            <tbody>{displayBookings}</tbody>
           </table>
         </div>
-        <div className="pagination">
-          <div>
-            <p>Showing 6 of 6 Data</p>
-          </div>
-          <div className="right-filter">
-            <button className="right-filter__button">Prev</button>
-            <button className="right-filter__button selected">1</button>
-            <button className="right-filter__button">Next</button>
-          </div>
+        <div className="paginationContainer">
+          <p>
+            Showing {listItemsPerPage} of {list.length} Data
+          </p>
+          <ReactPaginate
+            previousLabel={"Prev"}
+            nextLabel={"Next"}
+            pageCount={pageCount}
+            onPageChange={changePage}
+            containerClassName={"paginationBtns"}
+            previousLinkClassName={"previousBtn"}
+            nextLinkClassName={"nextBtn"}
+            disabledClassName={"paginationDisabled"}
+            activeClassName={"paginationActive"}
+          />
         </div>
       </Style>
     </>
