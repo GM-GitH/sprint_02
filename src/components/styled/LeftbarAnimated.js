@@ -23,6 +23,7 @@ const Styles = styled.div`
     width: 20%;
     height: 100%;
     background-color: white;
+    box-shadow: 13pt 3pt 40pt #00000005;
     /* transition: left 300ms ease-out; */
   }
   .leftbar.inactive {
@@ -150,22 +151,22 @@ function LeftbarAnimated({ logout, props }) {
     <>
       <Styles>
         <nav className={leftbar ? "leftbar inactive" : "leftbar"}>
-          <img className="logo" src={img.logo} alt="Hotel Admin Dashboard logo" />
+          <img className="logo" src={img.logo} alt="Hotel logo" />
           <button className="menu" onClick={showleftbar}></button>
-          <Link to="/dashboard">
-            <img src={dashboard} alt="" /> Dashboard
+          <Link to="/">
+            <img id="dashboard" src={dashboard} alt="" /> Dashboard
           </Link>
           <Link to="/rooms">
-            <img src={rooms} alt="" /> Rooms
+            <img id="rooms" src={rooms} alt="" /> Rooms
           </Link>
           <Link to="/bookings">
-            <img src={bookings} alt="" /> Bookings
+            <img id="bookings" src={bookings} alt="" /> Bookings
           </Link>
           <Link to="/users">
-            <img src={users} alt="" /> Users
+            <img id="users" src={users} alt="" /> Users
           </Link>
           <Link to="/contact">
-            <img src={contact} alt="" /> Contact
+            <img id="contact" src={contact} alt="" /> Contact
           </Link>
         </nav>
       </Styles>

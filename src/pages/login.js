@@ -48,7 +48,7 @@ const Login = ({user, setUser}) => {
           <Input type="email" name="email" id="email" placeholder="email" defaultValue="admin@example.com" required onChange={(e) => setEmail(e.target.value)} />
           <Label>Password:</Label>
           <Input type="password" name="password" id="password" placeholder="password" defaultValue="example" required onChange={(e) => setPassword(e.target.value)} />
-          <ButtonGreen type="submit">Login</ButtonGreen>
+          <ButtonGreen type="submit" name="submit" id="submit">Login</ButtonGreen>
           <P>*Just click "Login" to start.</P>
         </Form>
       </Subcontainer>

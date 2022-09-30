@@ -64,16 +64,6 @@ a {
     margin-right: 20px
   }
 }
-#leftbar {
-  display: block;
-  position: fixed;
-  height: 100%;
-  background-color: #ffffff;
-  color: #799283;
-  font-family: "Poppins", sans-serif;
-  width: 20%;
-  box-shadow: 13pt 3pt 40pt #00000005;
-}
 #navbar {
   margin-left: 20%;
 }
