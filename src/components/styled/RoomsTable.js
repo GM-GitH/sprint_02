@@ -119,7 +119,7 @@ const Style = styled.div`
     padding: 0;
     list-style: none;
     & li {
-      margin: 10px;
+      margin-top: 10px;
     }
     & a {
       text-align: center;
@@ -127,26 +127,33 @@ const Style = styled.div`
       background-color: inherit;
       font-size: 14px;
       border-style: none;
-      border: 1px solid #135846;
       border-radius: 10px;
-      padding: 10px 5px;
-      margin-left: 20px;
+      padding: 10px 20px;
+      margin-left: 0px;
       &:hover {
         color: #ffffff;
         background-color: #135846;
       }
     }
   }
+  .previousBtn {
+    border: 1px solid #135846 !important;
+    margin-right: 20px;
+  }
+  .nextBtn {
+    border: 1px solid #135846 !important;
+    margin-left: 20px !important;
+  }
   .paginationActive a {
     color: #ffffff;
+    border: 1px solid #135846;
     background-color: #135846;
     cursor: default;
   }
 `;
 export const RoomsTable = () => {
   const rooms = jsonRooms;
-  //eslint-disable-next-line
-  const [list, setList] = useState(rooms.slice(0, 25));
+  const list = rooms.slice(0, 20);
   const [page, setPage] = useState(0);
   const listItemsPerPage = 5;
   const pagesVisited = page * listItemsPerPage;

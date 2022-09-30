@@ -10,20 +10,8 @@ import users from "../assets/icon/4users.png"
 import contact from "../assets/icon/5guest.png"
 // import image from "../assets/img/image";
 import Home from "../components/Home";
+import { useState } from "react";
 
-const leftOpen = () => {
-  document.getElementById("navbar").style.marginLeft = "20%";
-  document.getElementById("leftbar").style.width = "20%";
-  document.getElementById("leftbar").style.display = "block";
-  document.getElementById("openNav").style.display = "none";
-  document.getElementById("closeNav").style.display = "inline-block";
-};
-const leftClose = () => {
-  document.getElementById("navbar").style.marginLeft = "0%";
-  document.getElementById("leftbar").style.display = "none";
-  document.getElementById("openNav").style.display = "inline-block";
-  document.getElementById("closeNav").style.display = "none";
-};
 const DashboardStyle = styled.div`
   .navbar-container {
     display: flex;
@@ -126,6 +114,25 @@ const DashboardStyle = styled.div`
 const Dashboard = ({logout}) => {
   const isLogin = localStorage.getItem("isLogin")
   const navigate = useNavigate()
+  const [ navbarVisibility, setNavbarVisibility] = useState(true)
+
+  function toogleVisibility() {
+    if (navbarVisibility) {
+      setNavbarVisibility(false);
+      document.getElementById("navbar").style.marginLeft = "0%";
+      document.getElementById("leftbar").style.display = "none";
+      document.getElementById("openNav").style.display = "inline-block";
+      document.getElementById("closeNav").style.display = "none";      
+    }
+    else {
+      setNavbarVisibility(true)
+      document.getElementById("navbar").style.marginLeft = "20%";
+      document.getElementById("leftbar").style.width = "20%";
+      document.getElementById("leftbar").style.display = "block";
+      document.getElementById("openNav").style.display = "none";
+      document.getElementById("closeNav").style.display = "inline-block";
+    }
+  }
   
   function handleLocalStorage() {
     localStorage.removeItem("isLogin")
@@ -139,7 +146,6 @@ const Dashboard = ({logout}) => {
   return (
     <div>
       <DashboardStyle>
-        <div className="left-panel"></div>
         <div id="leftbar">
           <img className="logo" src={img.logo} alt="Hotel Admin Dashboard logo" />
           <Link to="/dashboard"><img src={dashboard} alt="" /> Dashboard</Link>
@@ -151,8 +157,8 @@ const Dashboard = ({logout}) => {
         <div className="navbar" id="navbar">
           <div className="navbar-container">
             <div className="navbar-title">
-              <button id="closeNav" className="close" onClick={leftClose}></button>
-              <button id="openNav" className="open" onClick={leftOpen}></button>
+              <button id="closeNav" className="close" onClick={toogleVisibility}></button>
+              <button id="openNav" className="open" onClick={toogleVisibility}></button>
               <h1>Dashboard</h1>
             </div>
             <div className="navbar-buttons">
