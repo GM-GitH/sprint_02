@@ -35,7 +35,20 @@ export const ButtonRed = styled(ButtonGreen)`
   color: ${color[4]};
   background: ${color[5]};
   &:hover {
+    transition: all 0.3s ease 0s;
     color: ${color[5]};
     background-color: ${color[4]};
   }
 `;
+
+export const ButtonYlw = (props) => {
+  const ButtonY = styled.button`
+    color: ${color[2]};
+    background-color: ${props.availib ? "#FF9C3A" : "gray"};
+    &:hover {
+      color: ${color[3]};
+      background-color: ${color[2]};
+    }
+  `;
+  return <ButtonY availib={props.availib}>{props.label}</ButtonY>;
+};

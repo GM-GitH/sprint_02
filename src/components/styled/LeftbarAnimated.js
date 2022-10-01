@@ -24,9 +24,10 @@ const Styles = styled.div`
     height: 100%;
     background-color: white;
     box-shadow: 13pt 3pt 40pt #00000005;
+    transition: all 0.5s;
     /* transition: left 300ms ease-out; */
   }
-  .leftbar.inactive {
+  .inactive {
     left: -20%;
   }
   nav a {
@@ -39,6 +40,7 @@ const Styles = styled.div`
     &:hover {
       color: #e23428;
       border-left: 5px solid #e23428;
+  transition: 0.3s;
       & img {
         filter: brightness(0.55) hue-rotate(241deg) saturate(20);
       }
@@ -77,6 +79,17 @@ const NavbarStyle = styled.div`
     box-shadow: 0pt 3pt 10pt #00000005;
     user-select: none;
     cursor: default;
+    /* transition: left 400ms; */
+  }
+  .left-active {
+    margin-left: 20%;
+    transition: all 0.5s;
+    /* transition: left 400ms; */
+  }
+  .left-inactive {
+    margin-left: 0%;
+    transition: all 0.5s;
+    /* transition: left 400ms; */
   }
   .navbar-buttons {
     display: inline-block;
@@ -85,6 +98,11 @@ const NavbarStyle = styled.div`
   .material-symbols-outlined {
     margin-right: 30px;
     color: #135846;
+    transition: transform .1s;
+    &:hover {
+      color: #e23428;
+      transform: scale(1.2)
+    }
   }
   .logo {
     box-sizing: border-box;
@@ -112,9 +130,6 @@ const NavbarStyle = styled.div`
       vertical-align: middle;
       margin-right: 20px;
     }
-  }
-  .left-active {
-    margin-left: 20%;
   }
   img {
     position: relative;
@@ -171,7 +186,7 @@ function LeftbarAnimated({ logout, props }) {
         </nav>
       </Styles>
       <NavbarStyle>
-        <div className={leftbar ? "" : "left-active"}>
+        <div className={leftbar ? "left-inactive" : "left-active"}>
           <div className="navbar-container">
             <div className="navbar-title">
               <h1>Dashboard</h1>

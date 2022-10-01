@@ -3,11 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { ButtonRed } from "../components/styled/StyledBtn";
 import img from "../assets/icon/img";
-import dashboard from "../assets/icon/1dashboard.png"
-import rooms from "../assets/icon/2rooms.png"
-import bookings from "../assets/icon/3bookings.png"
-import users from "../assets/icon/4users.png"
-import contact from "../assets/icon/5guest.png"
+import dashboard from "../assets/icon/1dashboard.png";
+import rooms from "../assets/icon/2rooms.png";
+import bookings from "../assets/icon/3bookings.png";
+import users from "../assets/icon/4users.png";
+import contact from "../assets/icon/5guest.png";
 // import image from "../assets/img/image";
 import Home from "../components/Home";
 import { useState } from "react";
@@ -32,6 +32,11 @@ const DashboardStyle = styled.div`
   .material-symbols-outlined {
     margin-right: 30px;
     color: #135846;
+    transition: transform .1s;
+    &:hover {
+      color: #e23428;
+      transform: scale(1.2)
+    }
   }
   .logo {
     box-sizing: border-box;
@@ -51,13 +56,13 @@ const DashboardStyle = styled.div`
       color: #e23428;
       border-left: 5px solid #e23428;
       & img {
-        filter: brightness(.55) hue-rotate(241deg) saturate(20);
+        filter: brightness(0.55) hue-rotate(241deg) saturate(20);
       }
     }
     & img {
       width: 24px;
       vertical-align: middle;
-      margin-right: 20px
+      margin-right: 20px;
     }
   }
   #leftbar {
@@ -107,14 +112,14 @@ const DashboardStyle = styled.div`
     cursor: pointer;
     display: inline;
     vertical-align: bottom;
-    margin-left: 50px
+    margin-left: 50px;
   }
 `;
 
-const Dashboard = ({logout}) => {
-  const isLogin = localStorage.getItem("isLogin")
-  const navigate = useNavigate()
-  const [ navbarVisibility, setNavbarVisibility] = useState(true)
+const Dashboard = ({ logout }) => {
+  const isLogin = localStorage.getItem("isLogin");
+  const navigate = useNavigate();
+  const [navbarVisibility, setNavbarVisibility] = useState(true);
 
   function toogleVisibility() {
     if (navbarVisibility) {
@@ -122,10 +127,9 @@ const Dashboard = ({logout}) => {
       document.getElementById("navbar").style.marginLeft = "0%";
       document.getElementById("leftbar").style.display = "none";
       document.getElementById("openNav").style.display = "inline-block";
-      document.getElementById("closeNav").style.display = "none";      
-    }
-    else {
-      setNavbarVisibility(true)
+      document.getElementById("closeNav").style.display = "none";
+    } else {
+      setNavbarVisibility(true);
       document.getElementById("navbar").style.marginLeft = "20%";
       document.getElementById("leftbar").style.width = "20%";
       document.getElementById("leftbar").style.display = "block";
@@ -133,10 +137,10 @@ const Dashboard = ({logout}) => {
       document.getElementById("closeNav").style.display = "inline-block";
     }
   }
-  
+
   function handleLocalStorage() {
-    localStorage.removeItem("isLogin")
-    navigate("/login")
+    localStorage.removeItem("isLogin");
+    navigate("/login");
   }
 
   useEffect(() => {
@@ -148,11 +152,21 @@ const Dashboard = ({logout}) => {
       <DashboardStyle>
         <div id="leftbar">
           <img className="logo" src={img.logo} alt="Hotel Admin Dashboard logo" />
-          <Link to="/dashboard"><img src={dashboard} alt="" /> Dashboard</Link>
-          <Link to="/rooms"><img src={rooms} alt="" /> Rooms</Link>
-          <Link to="/bookings"><img src={bookings} alt="" /> Bookings</Link>
-          <Link to="/users"><img src={users} alt="" /> Users</Link>
-          <Link to="/contact"><img src={contact} alt="" /> Contact</Link>
+          <Link to="/dashboard">
+            <img src={dashboard} alt="" /> Dashboard
+          </Link>
+          <Link to="/rooms">
+            <img src={rooms} alt="" /> Rooms
+          </Link>
+          <Link to="/bookings">
+            <img src={bookings} alt="" /> Bookings
+          </Link>
+          <Link to="/users">
+            <img src={users} alt="" /> Users
+          </Link>
+          <Link to="/contact">
+            <img src={contact} alt="" /> Contact
+          </Link>
         </div>
         <div className="navbar" id="navbar">
           <div className="navbar-container">
@@ -180,4 +194,4 @@ const Dashboard = ({logout}) => {
     </div>
   );
 };
-export default Dashboard
+export default Dashboard;
