@@ -4,13 +4,13 @@ import LeftbarAnimated from "../components/styled/LeftbarAnimated";
 
 
 
-const Contact = () => {
+const Contact = ({logout, props}) => {
   useEffect(() => {
     document.title = "Dashboard | Contact";
   }, []);
   return (
     <>
-        <LeftbarAnimated />
+        <LeftbarAnimated logout={logout} />
     </>
   );
 };

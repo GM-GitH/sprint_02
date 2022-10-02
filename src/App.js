@@ -22,24 +22,24 @@ function App() {
   const logout = () => {setUser(null); localStorage.removeItem("isLogin");};
 
   return (
-    <Router>
-      <div style={{ position:"relative", display: "inline-block", width: "100%", backgroundColor:"gray", zIndex:"0"}}>
+    <Router basename="/sprint_02">
+      {/* <div style={{ position:"relative", display: "inline-block", width: "100%", backgroundColor:"gray", zIndex:"0"}}>
         <Link to="/login">Login </Link>
         <Link to="/"> | Dashboard</Link>
       {user ? <button style={{ float: "right", padding: "5px"}} onClick={logout}>Logout</button> : <button style={{ float: "right", padding: "5px"}} onClick={login}>Login</button>}
-      </div>
+      </div> */}
 
 
       <Routes>
         <Route path="/login" element={user ? <Navigate to="/"/> : <Login setUser={setUser} />} />
         <Route element={<PrivateRoute user={user} />}>
           <Route path="*" element={<Navigate to="/" />} />
-          <Route path="/" element={<Dashboard user={user} logout={logout} />} />
-          <Route path="/rooms" element={<Rooms />} />
-          <Route path="/bookings" element={<Bookings />} />
-          <Route path="/users" element={<Users />} />
+          <Route path="/" element={<Dashboard logout={logout} />} />
+          <Route path="/rooms" element={<Rooms logout={logout} />} />
+          <Route path="/bookings" element={<Bookings logout={logout} />} />
+          <Route path="/users" element={<Users logout={logout} />} />
           <Route path="/users/:id" element={<h1>ID: </h1>} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/contact" element={<Contact logout={logout} />} />
         </Route>
       </Routes>
     </Router>

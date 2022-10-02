@@ -19,6 +19,7 @@ export const ButtonGreen = styled.button`
   background: ${color[1]};
   margin: 0 auto;
   &:hover {
+    transition: all 0.3s ease 0s;
     color: ${color[1]};
     background-color: ${color[0]};
   }
@@ -27,6 +28,7 @@ export const ButtonYellow = styled(ButtonGreen)`
   color: ${color[2]};
   background: ${color[3]};
   &:hover {
+    transition: all 0.3s ease 0s;
     color: ${color[3]};
     background-color: ${color[2]};
   }
@@ -43,6 +45,7 @@ export const ButtonRed = styled(ButtonGreen)`
 
 export const ButtonYlw = (props) => {
   const ButtonY = styled.button`
+    transition: all 0.3s ease 0s;
     color: ${color[2]};
     background-color: ${props.availib ? "#FF9C3A" : "gray"};
     &:hover {

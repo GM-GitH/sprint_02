@@ -9,11 +9,14 @@ const HomeStyle = styled.div`
     box-shadow: 0px 4px 4px #00000005;
     padding: 22px 22px 20px;
     &:hover {
+    transition: all 0.3s;
+      transform: scale(1.05);
       box-shadow: 0px 16px 30px #00000014;
       & .card__img {
         filter: brightness(10);
       }
       & .card__bg {
+    transition: all 0.3s;
         background-color: #e23428;
       }
     }
